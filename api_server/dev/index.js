@@ -30,7 +30,6 @@ const db_config = {
   user: "allan",
   password: "allan",
   database: "bali6529_jdfPlannings",
-  // database: "planning",
 };
 
 var db = null;
@@ -87,7 +86,7 @@ io.on("connection", (socket) => {
 /* *************************** SERVER START ************************ */
 /* **************************************************************** */
 
-httpServer.listen(3000, (err) => {
+httpServer.listen(3000, "127.0.0.1", (err) => {
   if (err) throw err;
   console.log(`> Server Ready`);
 });

@@ -13,7 +13,7 @@
 		"ag-grid-react": "^28.2",
 		"axios": "^1.1",
 		"babel-plugin-styled-components": "^2.0.2",
-		"gatsby": "^4.6.2",
+		"gatsby": "^4.25.7",
 		"gatsby-plugin-image": "^2.6.0",
 		"gatsby-plugin-layout": "^3.24.0",
 		"gatsby-plugin-manifest": "^4.6.0",
@@ -44,7 +44,7 @@
 		"build": "gatsby build",
 		"develop": "gatsby develop",
 		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-		"start": "gatsby develop",
+		"start": "gatsby develop --watch",
 		"serve": "gatsby serve",
 		"clean": "gatsby clean"
 	}
