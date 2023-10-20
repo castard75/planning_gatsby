@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+require("dotenv").config();
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -38,23 +39,23 @@ module.exports = (db) => {
           .send("Votre identifiant ou votre mot de passe est incorrect.");
       else user = user.results[0];
       // Check if password is correct
-      // if (await bcrypt.compare(password, user.password)) {
-      //   const token = jwt.sign(
-      //     { user_id: user.id, mail: user.mail },
-      //     process.env.TOKEN_KEY,
-      //     {
-      //       expiresIn: "30 days",
-      //     }
-      //   );
-      //   // Update login token
-      //   user = await dbController.putEntry(user.id, { token: token });
-      //   if (!user.statut) res.status(500).send("Une erreur est survenue.");
-      //   else res.status(200).send({ token });
-      // } else {
-      //   res
-      //     .status(400)
-      //     .send("Votre identifiant ou votre mot de passe est incorrect.");
-      // }
+      if (user) {
+        const token = jwt.sign(
+          { user_id: user.id, mail: user.mail },
+          process.env.TOKEN_KEY,
+          {
+            expiresIn: "30 days",
+          }
+        );
+        // Update login token
+        user = await dbController.putEntry(user.id, { token: token });
+        if (!user.statut) res.status(500).send("Une erreur est survenue.");
+        else res.status(200).send({ token });
+      } else {
+        res
+          .status(400)
+          .send("Votre identifiant ou votre mot de passe est incorrect.");
+      }
     })
     .post("/signup", [authMiddleware, fieldsMiddleware], async (req, res) => {
       let user = null;

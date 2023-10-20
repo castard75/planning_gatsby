@@ -9,6 +9,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "bufferutil": "^4.0.6",
+    "dotenv": "^16.3.1",
     "express": "^4.17.2",
     "express-rate-limit": "^6.7.0",
     "formidable": "^2.0.1",
@@ -21,5 +22,4 @@
   "scripts": {
     "start": "nodemon index.js"
   }
-  
 }
