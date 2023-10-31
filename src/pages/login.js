@@ -172,7 +172,7 @@ const LoginPage = () => {
         if (!!res.data.token) {
           setToken(res.data.token);
           setServerState({ submitting: false, status: "success" });
-          console.log("okay");
+          console.log("post ok");
           navigate("/");
         } else {
           setServerState({ submitting: false, status: "error" });

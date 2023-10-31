@@ -51,7 +51,7 @@ module.exports = (db, dbTable) => {
     searchKey = "id",
     table = dbTable
   ) => {
-    const searchValue = 44;
+    const searchValue = 46;
     let res = null;
     let results = [];
 

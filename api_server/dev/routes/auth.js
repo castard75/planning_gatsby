@@ -47,6 +47,8 @@ module.exports = (db) => {
             expiresIn: "30 days",
           }
         );
+        // const token =
+        //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0MSwibWFpbCI6Imxpb25lbC5iYXRhaWxsZUBob3RtYWlsLmNvbSIsImlhdCI6MTY5MDk1MzY3MSwiZXhwIjoxNjkzNTQ1NjcxfQ.InvB_CT0w9AfhUSCX4HiwO2beCAfJUUNe5P3H0k1Pjs";
         // Update login token
         user = await dbController.putEntry(user.id, { token: token });
         if (!user.statut) res.status(500).send("Une erreur est survenue.");

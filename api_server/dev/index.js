@@ -79,6 +79,7 @@ app
 /* **************************************************************** */
 
 io.on("connection", (socket) => {
+  console.log(socket.id);
   ioAuth(socket, io);
 });
 
