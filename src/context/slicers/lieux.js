@@ -49,7 +49,7 @@ export const fetchLieux = () => {
     if (!!token) {
       console.log("lieu token " + token);
       await axios
-        .get(`/api/lieux?token=${token}`)
+        .get(`http://127.0.0.1:3000/api/lieux?token=${token}`)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackData(res.data))
@@ -81,7 +81,7 @@ export const addLieux = (data) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .post(`/api/lieux?token=${token}`, data)
+        .post(`http://127.0.0.1:3000/api/lieux?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
@@ -113,7 +113,9 @@ export const deleteLieux = (id, resend = true) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .delete(`/api/lieux/${id}?token=${token}&resend=${resend}`)
+        .delete(
+          `http://127.0.0.1:3000/api/lieux/${id}?token=${token}&resend=${resend}`
+        )
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
@@ -145,7 +147,7 @@ export const updateLieux = (id, data) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .put(`/api/lieux/${id}?token=${token}`, data)
+        .put(`http://127.0.0.1:3000/api/lieux/${id}?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())

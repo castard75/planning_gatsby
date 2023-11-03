@@ -74,12 +74,8 @@ export const fetchAnimations = (selectDate) => {
     console.log(getToken().token);
     const token = getToken().token;
     await token;
-    console.log("animations token 1" + token);
-    // const token =
-    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0MSwibWFpbCI6Imxpb25lbC5iYXRhaWxsZUBob3RtYWlsLmNvbSIsImlhdCI6MTY5MDk1MzY3MSwiZXhwIjoxNjkzNTQ1NjcxfQ.InvB_CT0w9AfhUSCX4HiwO2beCAfJUUNe5P3H0k1Pjs";
-    console.log("animations pas token ");
-    if (token) {
-      console.log("animations token " + token);
+
+    if (!!token) {
       await axios
         .get(`http://127.0.0.1:3000/api/animations`)
         .then((res) => {
@@ -111,7 +107,10 @@ export const addAnimations = (data, number = 1) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .post(`/api/animations?token=${token}&number=${number}`, data)
+        .post(
+          `http://127.0.0.1:3000/api/animations?token=${token}&number=${number}`,
+          data
+        )
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
@@ -143,7 +142,9 @@ export const deleteAnimations = (id, resend = true) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .delete(`/api/animations/${id}?token=${token}&resend=${resend}`)
+        .delete(
+          `http://127.0.0.1:3000/api/animations/${id}?token=${token}&resend=${resend}`
+        )
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
@@ -177,7 +178,7 @@ export const updateAnimations = (id, data) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .put(`/api/animations/${id}?token=${token}`, data)
+        .put(`http://127.0.0.1:3000/api/animations/${id}?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())

@@ -87,7 +87,7 @@ const Socket = (props) => {
 
       try {
         const token = getToken().token;
-        console.log(token);
+
         if (!!token) {
           socketProvider.current = await socketIO.connect(SOCKET_URL);
 
@@ -134,7 +134,7 @@ const Socket = (props) => {
               });
 
               //   clearTimeout(timeoutSocket);
-              //   if (callback) callback(socketProvider.current, true);
+              if (callback) callback(socketProvider.current, true);
             });
           });
         } else {
@@ -162,6 +162,9 @@ const Socket = (props) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       fetchAnimationsAction();
+      fetchAnimateursAction();
+      fetchClientsAction();
+      fetchLieuxAction();
       socketStat.currentSocket &&
         socketStat.currentSocket.removeAllListeners("subscribeAnimations");
       socketStat.currentSocket &&
@@ -169,25 +172,34 @@ const Socket = (props) => {
           "subscribeAnimations",
           fetchAnimationsAction
         );
+
+      console.log("animations start");
     });
     return () => clearTimeout(timeout);
   }, [fetchAnimationsAction, selectDate, socketStat.currentSocket]);
 
   useEffect(() => {
+    const token = getToken().token;
+
     const timeout = setTimeout(() => {
       if (props.pathname === "/login" || props.pathname === "/login/") {
         if (haveTokenLogin() && socketStat.socket && socketStat.auth)
           navigate("/");
       } else {
         if (networkState.online && networkState.rtt <= 1300) {
-          if (haveTokenLogin()) {
+          if (token) {
+            console.log("etape");
             if (!socketStat.socket || !socketStat.auth) {
+              console.log("etape1");
               if (!isInitSockets) {
+                console.log("etape2");
                 console.log("No socket connection, init socket");
                 initSocket((socket, stat) => {
                   if (!stat) {
+                    console.log("etape3");
                     navigate("/login");
                   } else {
+                    console.log("etape4");
                     updateSocketStat({ currentSocket: socket });
 
                     fetchAnimationsAction();
@@ -211,7 +223,7 @@ const Socket = (props) => {
             updateSocketStat({
               messageServeur: "Pas de token, veuillez vous authentifier.",
             });
-            // disconnectSocket();
+            disconnectSocket();
           }
         } else {
           if (networkState.online && networkState.rtt >= 1300) {

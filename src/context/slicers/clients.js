@@ -46,10 +46,11 @@ export const fetchClients = () => {
     dispatch(callApi());
     console.log("clients pas de  token ");
     const token = getToken().token;
+    await token;
     if (!!token) {
       console.log("clients token " + token);
       await axios
-        .get(`/api/clients?token=${token}`)
+        .get(`http://127.0.0.1:3000/api/clients`)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackData(res.data))
@@ -81,7 +82,7 @@ export const addClients = (data) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .post(`/api/clients?token=${token}`, data)
+        .post(`http://127.0.0.1:3000/api/clients?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
@@ -113,7 +114,9 @@ export const deleteClients = (id, resend = true) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .delete(`/api/clients/${id}?token=${token}&resend=${resend}`)
+        .delete(
+          `http://127.0.0.1:3000/api/clients/${id}?token=${token}&resend=${resend}`
+        )
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
@@ -145,7 +148,7 @@ export const updateClients = (id, data) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .put(`/api/clients/${id}?token=${token}`, data)
+        .put(`http://127.0.0.1:3000/api/clients/${id}?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())

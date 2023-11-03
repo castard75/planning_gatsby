@@ -46,16 +46,16 @@ export const fetchAnimateurs = () => {
     dispatch(callApi());
 
     const token = getToken().token;
-    console.log("animateur pas token ");
+    await token;
     if (!!token) {
       console.log("animateur token " + token);
       await axios
-        .get(`/api/animateurs?token=${token}`)
+        .get(`http://127.0.0.1:3000/api/animateurs`)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackData(res.data))
             : dispatch(
-                ApiCallBackFail("La récupération des animateurs a échoué")
+                ApiCallBackFail("La récupération des animateurss a échoué")
               );
         })
         .catch((error) => {
@@ -84,7 +84,7 @@ export const addAnimateurs = (data) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .post(`http://localhost:3000/api/animateurs?token=${token}`, data)
+        .post(`http://127.0.0.1:3000/api/animateurs?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
@@ -116,7 +116,9 @@ export const deleteAnimateurs = (id, resend = true) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .delete(`/api/animateurs/${id}?token=${token}&resend=${resend}`)
+        .delete(
+          `http://127.0.0.1:3000/api/animateurs/${id}?token=${token}&resend=${resend}`
+        )
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
@@ -150,7 +152,7 @@ export const updateAnimateurs = (id, data) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .put(`/api/animateurs/${id}?token=${token}`, data)
+        .put(`http://127.0.0.1:3000/api/animateurs/${id}?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())

@@ -47,14 +47,18 @@ module.exports = (app, db) => {
   router
     .route("/animations")
     .get((req, res) => {
-      dbController.get(
-        "*",
-        ({ statut, error, results }) => sendData(statut, res, results, error),
-        "animations",
-        // Supprimez la partie qui concerne la date
-        // Si vous n'avez plus besoin de filtrer par date, vous pouvez simplement utiliser la requête suivante :
-        "WHERE `date` >= DATE_SUB(NOW(), INTERVAL 4 MONTH)"
-      );
+      dbController
+        .get(
+          "*",
+          ({ statut, error, results }) => sendData(statut, res, results, error),
+          "animations",
+          // Supprimez la partie qui concerne la date
+          // Si vous n'avez plus besoin de filtrer par date, vous pouvez simplement utiliser la requête suivante :
+          "WHERE `date` >= DATE_SUB(NOW(), INTERVAL 4 MONTH)"
+        )
+        .then((res) => {
+          console.log("requête envoyé : " + res.data);
+        });
     })
     .post([authMiddleware, fieldsMiddleware], (req, res) => {
       const numberOfAnimations =
