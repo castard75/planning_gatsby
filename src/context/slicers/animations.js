@@ -74,7 +74,7 @@ export const fetchAnimations = (selectDate) => {
     console.log(getToken().token);
     const token = getToken().token;
     await token;
-    if (!!token) {
+    if (token) {
       console.log("animateur token " + token);
       await axios
         .get(`http://localhost:3000/api/animations`)

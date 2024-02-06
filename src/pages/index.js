@@ -721,6 +721,7 @@ const PlanningPage = () => {
   }, []);
 
   useEffect(() => {
+    console.log();
     const timeout = setTimeout(() => {
       setAnimations(filterDate(animationsInit, selectDate));
       setDataAnimation((state) => ({ ...state, tab: animationsInit }));
@@ -925,7 +926,7 @@ const PlanningPage = () => {
           params.data &&
           setDataAnimation({ tab: animationsInit, id: params.data.id })
         }
-        rowData={animations}
+        rowData={animationsInit}
         columnDefs={columnTab}
       />
     </PageLayout>
