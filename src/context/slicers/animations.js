@@ -74,15 +74,16 @@ export const fetchAnimations = (selectDate) => {
     console.log(getToken().token);
     const token = getToken().token;
     await token;
-
     if (!!token) {
+      console.log("animateur token " + token);
       await axios
-        .get(`http://127.0.0.1:3000/api/animations`)
+        .get(`http://localhost:3000/api/animations`)
         .then((res) => {
+          console.log(res.data);
           res.data.statut === "success"
             ? dispatch(ApiCallBackData(res.data))
             : dispatch(
-                ApiCallBackFail("La récupération des animations a échoué")
+                ApiCallBackFail("La récupération des animateurss a échoué")
               );
         })
         .catch((error) => {
@@ -95,7 +96,11 @@ export const fetchAnimations = (selectDate) => {
           );
         });
     } else {
-      dispatch(ApiCallBackFail("BUG ANIMATION"));
+      dispatch(
+        ApiCallBackFail(
+          "Aucun jeton d'authentification, veuillez vous reconnecter"
+        )
+      );
     }
   };
 };
@@ -108,7 +113,7 @@ export const addAnimations = (data, number = 1) => {
     if (!!token) {
       await axios
         .post(
-          `http://127.0.0.1:3000/api/animations?token=${token}&number=${number}`,
+          `http://localhost:3000/api/animations?token=${token}&number=${number}`,
           data
         )
         .then((res) => {
@@ -143,7 +148,7 @@ export const deleteAnimations = (id, resend = true) => {
     if (!!token) {
       await axios
         .delete(
-          `http://127.0.0.1:3000/api/animations/${id}?token=${token}&resend=${resend}`
+          `http://localhost:3000/api/animations/${id}?token=${token}&resend=${resend}`
         )
         .then((res) => {
           res.data.statut === "success"
@@ -178,7 +183,7 @@ export const updateAnimations = (id, data) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .put(`http://127.0.0.1:3000/api/animations/${id}?token=${token}`, data)
+        .put(`http://localhost:3000/api/animations/${id}?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())

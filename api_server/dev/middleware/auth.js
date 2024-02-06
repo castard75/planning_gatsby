@@ -69,12 +69,17 @@ module.exports = {
 
     if (!token)
       res.status(403).send("Un token est requis pour vous connecter.");
-    try {
+    else {
       const decoded = jwt.verify(token, process.env.TOKEN_KEY);
       req.user = decoded;
-    } catch (err) {
-      res.status(401).send("Token non valide.");
+      next();
     }
-    next();
+    // try {
+    //   const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+    //   req.user = decoded;
+    // } catch (err) {
+    //   console.log("Token non valide.");
+    // }
+    // next();
   },
 };

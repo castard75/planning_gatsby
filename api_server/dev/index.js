@@ -2,6 +2,7 @@ const app = require("express")();
 const mysql = require("mysql");
 const { createServer } = require("http");
 const httpServer = createServer(app);
+const cors = require("cors");
 const { Server } = require("socket.io");
 const io = new Server(httpServer, {
   serveClient: false,
@@ -13,7 +14,7 @@ const io = new Server(httpServer, {
 /* ******************************************************************* */
 /* *********************** MIDDLEWARE & ROUTES *********************** */
 /* ******************************************************************* */
-
+app.use(cors());
 const { ioAuth, corsAuth } = require("./middleware/auth");
 const authRouter = require("./routes/auth");
 const animationsRouter = require("./routes/animations");
@@ -27,9 +28,9 @@ const lieuxRouter = require("./routes/lieux");
 
 const db_config = {
   host: "127.0.0.1",
-  user: "allan",
-  password: "allan",
-  database: "bali6529_jdfPlannings",
+  user: "root",
+  password: "",
+  database: "planning",
 };
 
 var db = null;
@@ -63,7 +64,6 @@ setInterval(() => {
 
 app
   .set("io", io)
-  .use(corsAuth)
   .use("/auth", authRouter(db))
   .use("/api", animationsRouter(app, db))
   .use("/api", animateursRouter(app, db))
@@ -87,7 +87,7 @@ io.on("connection", (socket) => {
 /* *************************** SERVER START ************************ */
 /* **************************************************************** */
 
-httpServer.listen(3000, "127.0.0.1", (err) => {
+httpServer.listen(3000, "localhost", (err) => {
   if (err) throw err;
   console.log(`> Server Ready`);
 });

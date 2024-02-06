@@ -188,7 +188,7 @@ const Socket = (props) => {
       } else {
         if (networkState.online && networkState.rtt <= 1300) {
           if (token) {
-            console.log("etape");
+            // console.log("etape");
             if (!socketStat.socket || !socketStat.auth) {
               console.log("etape1");
               if (!isInitSockets) {

@@ -50,8 +50,9 @@ export const fetchClients = () => {
     if (!!token) {
       console.log("clients token " + token);
       await axios
-        .get(`http://127.0.0.1:3000/api/clients`)
+        .get(`http://localhost:3000/api/clients`)
         .then((res) => {
+          console.log(res.data);
           res.data.statut === "success"
             ? dispatch(ApiCallBackData(res.data))
             : dispatch(ApiCallBackFail("La récupération des clients a échoué"));
@@ -82,7 +83,7 @@ export const addClients = (data) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .post(`http://127.0.0.1:3000/api/clients?token=${token}`, data)
+        .post(`http://localhost:3000/api/clients?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
@@ -115,7 +116,7 @@ export const deleteClients = (id, resend = true) => {
     if (!!token) {
       await axios
         .delete(
-          `http://127.0.0.1:3000/api/clients/${id}?token=${token}&resend=${resend}`
+          `http://localhost:3000/api/clients/${id}?token=${token}&resend=${resend}`
         )
         .then((res) => {
           res.data.statut === "success"
@@ -148,7 +149,7 @@ export const updateClients = (id, data) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .put(`http://127.0.0.1:3000/api/clients/${id}?token=${token}`, data)
+        .put(`http://localhost:3000/api/clients/${id}?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
