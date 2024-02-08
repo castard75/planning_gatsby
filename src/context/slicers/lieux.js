@@ -75,13 +75,16 @@ export const fetchLieux = () => {
 
 export const addLieux = (data) => {
   return async (dispatch) => {
+    console.log("0");
     dispatch(callApi());
-
+    console.log("1");
     const token = getToken().token;
     if (!!token) {
+      console.log("2");
       await axios
-        .post(`http://localhost:3000/api/lieux?token=${token}`, data)
+        .post(`http://localhost:3000/api/addLieux?token=${token}`, data)
         .then((res) => {
+          console.log("3");
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
             : dispatch(ApiCallBackFail("La création du lieu a échoué"));

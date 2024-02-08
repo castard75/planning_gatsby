@@ -77,6 +77,7 @@ export const fetchAnimateurs = () => {
 };
 
 export const addAnimateurs = (data) => {
+  console.log("animateurs");
   return async (dispatch) => {
     dispatch(callApi());
 

@@ -22,6 +22,7 @@ const { ioAuth, corsAuth } = require("./middleware/auth");
 const authRouter = require("./routes/auth");
 const animationsRouter = require("./routes/animations");
 const addAnimationsRouter = require("./routes/addAnimations");
+const addLieuxRouter = require("./routes/addLieux");
 const animateursRouter = require("./routes/animateurs");
 const clientsRouter = require("./routes/clients");
 const lieuxRouter = require("./routes/lieux");
@@ -74,6 +75,7 @@ app
   .use("/api", addAnimationsRouter(app, db))
   .use("/api", clientsRouter(app, db))
   .use("/api", lieuxRouter(app, db))
+  .use("/api", addLieuxRouter(app, db))
   .route("*")
   .all((req, res, next) => {
     res.sendStatus(404);

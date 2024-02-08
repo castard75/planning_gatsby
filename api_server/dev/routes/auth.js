@@ -31,7 +31,7 @@ module.exports = (db) => {
       }
       // Check if user exists and get their informations
       user = await dbController.searchEntry();
-      console.log(user);
+
       if (!user.statut) res.status(500).send("Une erreur est survenue.");
       else if (user.results.length <= 0)
         res
