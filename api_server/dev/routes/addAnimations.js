@@ -3,8 +3,10 @@ const router = express.Router();
 
 const fieldsMiddleware = require("../middleware/formidable");
 const { authMiddleware } = require("../middleware/auth");
+const bodyParser = require("body-parser");
 
 const TIME_WINDOW_MS = 100;
+router.use(bodyParser.json());
 
 module.exports = (app, db) => {
   const dbController = require("../controllers/db")(db, "animations");
@@ -112,4 +114,5 @@ module.exports = (app, db) => {
       }
     }
   });
+  return router;
 };

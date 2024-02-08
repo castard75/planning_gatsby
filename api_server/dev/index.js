@@ -17,7 +17,7 @@ const io = new Server(httpServer, {
 /* ******************************************************************* */
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
+
 const { ioAuth, corsAuth } = require("./middleware/auth");
 const authRouter = require("./routes/auth");
 const animationsRouter = require("./routes/animations");
@@ -71,6 +71,7 @@ app
   .use("/auth", authRouter(db))
   .use("/api", animationsRouter(app, db))
   .use("/api", animateursRouter(app, db))
+  .use("/api", addAnimationsRouter(app, db))
   .use("/api", clientsRouter(app, db))
   .use("/api", lieuxRouter(app, db))
   .route("*")
