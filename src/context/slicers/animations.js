@@ -71,7 +71,6 @@ export const fetchAnimations = (selectDate) => {
         : selectDate.month === "décembre"
         ? "12"
         : "01";
-
     const token = getToken().token;
     await token;
     if (!!token) {
@@ -106,22 +105,22 @@ export const fetchAnimations = (selectDate) => {
 export const addAnimations = (data, number = 1) => {
   return async (dispatch) => {
     dispatch(callApi());
-    console.log("envoie 1");
+
     const token = getToken().token;
-    if (!!token) {
-      console.log("envoie 2");
+    if (token) {
       await axios
         .post(
-          `http://localhost:3000/api/animations?token=${token}&number=${number}`,
+          `http://localhost:3000/api/addAnimations?token=${token}&number=${number}`,
           data
         )
         .then((res) => {
-          console.log("envoie 3");
+          console.log(res.data);
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
             : dispatch(ApiCallBackFail("La création de l'animation a échoué"));
         })
         .catch((error) => {
+          console.log("animations 4");
           dispatch(
             ApiCallBackFail(
               error === "AxiosError: Network Error"

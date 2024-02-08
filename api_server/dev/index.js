@@ -17,9 +17,11 @@ const io = new Server(httpServer, {
 /* ******************************************************************* */
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
 const { ioAuth, corsAuth } = require("./middleware/auth");
 const authRouter = require("./routes/auth");
 const animationsRouter = require("./routes/animations");
+const addAnimationsRouter = require("./routes/addAnimations");
 const animateursRouter = require("./routes/animateurs");
 const clientsRouter = require("./routes/clients");
 const lieuxRouter = require("./routes/lieux");

@@ -721,7 +721,6 @@ const PlanningPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log();
     const timeout = setTimeout(() => {
       setAnimations(filterDate(animationsInit, selectDate));
       setDataAnimation((state) => ({ ...state, tab: animationsInit }));
