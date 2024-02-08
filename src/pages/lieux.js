@@ -107,6 +107,9 @@ const LieuxPage = () => {
           return params.newValue;
         },
         filter: "agTextColumnFilter",
+        cellRenderer: memo((params) => (
+          <SimpleCompEtiquette value={params.value} />
+        )),
         cellEditor: "agSelectCellEditor",
         cellEditorParams: {
           values: ["Ouest", "Nord", "Est", "Sud"],
@@ -122,6 +125,9 @@ const LieuxPage = () => {
         },
         cellEditor: "agLargeTextCellEditor",
         filter: "agTextColumnFilter",
+        cellRenderer: memo((params) => (
+          <SimpleCompEtiquette value={params.value} />
+        )),
         cellEditorPopup: true,
       },
       {
@@ -233,7 +239,9 @@ const LieuxPage = () => {
               className="dontShowWhenPrint"
               type="add"
               text="Ajouter un lieu"
-              onClick={() => dispatch(addLieux({ nom: "" }))}
+              onClick={() =>
+                dispatch(addLieux({ nom: "", adresse: "", zone: "" }))
+              }
             />
           </div>
           <Button

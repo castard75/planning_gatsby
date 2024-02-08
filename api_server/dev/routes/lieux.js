@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
+const formidableMiddleware = require("express-formidable");
 const fieldsMiddleware = require("../middleware/formidable");
 const { authMiddleware } = require("../middleware/auth");
-const bodyParser = require("body-parser");
-router.use(bodyParser.json());
 
 module.exports = (app, db) => {
   const dbController = require("../controllers/db")(db, "lieux");
@@ -25,9 +23,7 @@ module.exports = (app, db) => {
       );
     })
     .post([authMiddleware, fieldsMiddleware], (req, res) => {
-      console.log("req");
-      console.log(req.body);
-      dbController.post(req.body, ({ statut, error, results }) =>
+      dbController.post(req.fields, ({ statut, error, results }) =>
         sendData(statut, res, results, error, io)
       );
     });
@@ -41,10 +37,10 @@ module.exports = (app, db) => {
         ({ statut, error, results }) => sendData(statut, res, results, error)
       );
     })
-    .put([authMiddleware, fieldsMiddleware], (req, res) => {
+    .put((req, res) => {
       dbController.putEntry(
         req.params.id,
-        req.fields,
+        req.body,
         ({ statut, error, results }) =>
           sendData(statut, res, results, error, io)
       );

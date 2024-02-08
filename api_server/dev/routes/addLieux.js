@@ -46,25 +46,11 @@ module.exports = (app, db) => {
   };
 
   router.route("/addLieux").post((req, res) => {
-    console.log("1");
-
     try {
       // Formater les données pour correspondre aux colonnes de la table
       const currentDate = new Date();
-      //   const table= "lieux";
-      //   const {
-      //     contrat,
-      //     date,
-      //     etat,
-      //     horaires,
-      //     id_animateur,
-      //     id_client,
-      //     id_lieu,
-      //     produit,
-      //   } = req.body;
-      console.log(req.body);
-      console.log("////////////////////");
-      const sql = `INSERT INTO lieux (nom, adresse, zone) VALUES ( '${req.body.nom}', ' ', ' ')`;
+
+      const sql = `INSERT INTO lieux (nom, adresse, zone) VALUES ( '${req.body.nom}', '${req.body.adresse}', '${req.body.zone}')`;
 
       db.query(sql, (err, result) => {
         if (err) {
@@ -92,5 +78,23 @@ module.exports = (app, db) => {
       return res;
     }
   });
+
+  router
+    .route("/addLieux/:id")
+    .get(authMiddleware, (req, res) => {
+      dbController.searchEntry(
+        req.params.id,
+        "*",
+        ({ statut, error, results }) => sendData(statut, res, results, error)
+      );
+    })
+    .put([authMiddleware, fieldsMiddleware], (req, res) => {
+      dbController.putEntry(
+        req.params.id,
+        req.fields,
+        ({ statut, error, results }) =>
+          sendData(statut, res, results, error, io)
+      );
+    });
   return router;
 };

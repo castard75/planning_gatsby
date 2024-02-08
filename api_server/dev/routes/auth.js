@@ -23,8 +23,7 @@ module.exports = (db) => {
       console.log(req.fields);
       let user = null;
       const { mail, password } = req.fields;
-      console.log(mail);
-      console.log(password);
+
       // Check required fields
       if (!(mail && password)) {
         res.status(400).send("Veuillez remplir tous les champs.");

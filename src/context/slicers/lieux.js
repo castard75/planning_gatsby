@@ -147,10 +147,12 @@ export const updateLieux = (id, data) => {
     dispatch(callApi());
 
     const token = getToken().token;
-    if (!!token) {
+
+    if (token) {
       await axios
         .put(`http://localhost:3000/api/lieux/${id}?token=${token}`, data)
         .then((res) => {
+          console.log(res);
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
             : dispatch(ApiCallBackFail("La modification du lieu a échoué"));
