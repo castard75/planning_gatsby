@@ -48,11 +48,9 @@ export const fetchAnimateurs = () => {
     const token = getToken().token;
     await token;
     if (!!token) {
-      console.log("animateur token " + token);
       await axios
         .get(`http://localhost:3000/api/animateurs`)
         .then((res) => {
-          console.log(res.data);
           res.data.statut === "success"
             ? dispatch(ApiCallBackData(res.data))
             : dispatch(

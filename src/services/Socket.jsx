@@ -173,7 +173,7 @@ const Socket = (props) => {
           fetchAnimationsAction
         );
 
-      console.log("animations start");
+      // console.log("animations start");
     });
     return () => clearTimeout(timeout);
   }, [fetchAnimationsAction, selectDate, socketStat.currentSocket]);
@@ -188,18 +188,13 @@ const Socket = (props) => {
       } else {
         if (networkState.online && networkState.rtt <= 1300) {
           if (token) {
-            // console.log("etape");
             if (!socketStat.socket || !socketStat.auth) {
-              console.log("etape1");
               if (!isInitSockets) {
-                console.log("etape2");
                 console.log("No socket connection, init socket");
                 initSocket((socket, stat) => {
                   if (!stat) {
-                    console.log("etape3");
                     navigate("/login");
                   } else {
-                    console.log("etape4");
                     updateSocketStat({ currentSocket: socket });
 
                     fetchAnimationsAction();

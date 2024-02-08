@@ -925,7 +925,7 @@ const PlanningPage = () => {
           params.data &&
           setDataAnimation({ tab: animationsInit, id: params.data.id })
         }
-        rowData={animations}
+        rowData={animationsInit}
         columnDefs={columnTab}
       />
     </PageLayout>

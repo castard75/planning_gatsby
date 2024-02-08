@@ -44,15 +44,13 @@ export default ClientsSlicer.reducer;
 export const fetchClients = () => {
   return async (dispatch) => {
     dispatch(callApi());
-    console.log("clients pas de  token ");
+
     const token = getToken().token;
     await token;
     if (!!token) {
-      console.log("clients token " + token);
       await axios
         .get(`http://localhost:3000/api/clients`)
         .then((res) => {
-          console.log(res.data);
           res.data.statut === "success"
             ? dispatch(ApiCallBackData(res.data))
             : dispatch(ApiCallBackFail("La récupération des clients a échoué"));

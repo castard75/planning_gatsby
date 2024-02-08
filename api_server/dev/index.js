@@ -3,6 +3,7 @@ const mysql = require("mysql");
 const { createServer } = require("http");
 const httpServer = createServer(app);
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const { Server } = require("socket.io");
 const io = new Server(httpServer, {
   serveClient: false,
@@ -15,6 +16,7 @@ const io = new Server(httpServer, {
 /* *********************** MIDDLEWARE & ROUTES *********************** */
 /* ******************************************************************* */
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 const { ioAuth, corsAuth } = require("./middleware/auth");
 const authRouter = require("./routes/auth");
 const animationsRouter = require("./routes/animations");

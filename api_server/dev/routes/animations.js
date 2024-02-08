@@ -55,14 +55,19 @@ module.exports = (app, db) => {
     })
 
     .post([authMiddleware, fieldsMiddleware], (req, res) => {
+      console.log("1");
+
       const numberOfAnimations =
         req.body?.number || req.query?.number || req.cookies?.number;
       if (numberOfAnimations > 1) {
+        console.log("2");
         let i = 0;
         let lastResult = null;
         let haveError = false;
 
         for (i; i < numberOfAnimations; i++) {
+          console.log("3");
+          console.log(req.fields);
           dbController.post(req.fields, ({ statut, error, results }) => {
             lastResult = results;
             if (!statut) {

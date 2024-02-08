@@ -44,10 +44,9 @@ export default LieuxSlicer.reducer;
 export const fetchLieux = () => {
   return async (dispatch) => {
     dispatch(callApi());
-    console.log("lieu pas token ");
+
     const token = getToken().token;
     if (!!token) {
-      // console.log("lieu token " + token);
       await axios
         .get(`http://localhost:3000/api/lieux?token=${token}`)
         .then((res) => {

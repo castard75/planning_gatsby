@@ -71,15 +71,13 @@ export const fetchAnimations = (selectDate) => {
         : selectDate.month === "décembre"
         ? "12"
         : "01";
-    console.log(getToken().token);
+
     const token = getToken().token;
     await token;
     if (!!token) {
-      console.log("animateur token " + token);
       await axios
         .get(`http://localhost:3000/api/animations`)
         .then((res) => {
-          console.log(res.data);
           res.data.statut === "success"
             ? dispatch(ApiCallBackData(res.data))
             : dispatch(
@@ -108,15 +106,17 @@ export const fetchAnimations = (selectDate) => {
 export const addAnimations = (data, number = 1) => {
   return async (dispatch) => {
     dispatch(callApi());
-
+    console.log("envoie 1");
     const token = getToken().token;
     if (!!token) {
+      console.log("envoie 2");
       await axios
         .post(
           `http://localhost:3000/api/animations?token=${token}&number=${number}`,
           data
         )
         .then((res) => {
+          console.log("envoie 3");
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
             : dispatch(ApiCallBackFail("La création de l'animation a échoué"));
