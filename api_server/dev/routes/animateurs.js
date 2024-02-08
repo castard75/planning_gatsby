@@ -24,8 +24,8 @@ module.exports = (app, db) => {
         "animateurs"
       );
     })
-    .post([authMiddleware, fieldsMiddleware], (req, res) => {
-      dbController.post(req.fields, ({ statut, error, results }) =>
+    .post((req, res) => {
+      dbController.post(req.body, ({ statut, error, results }) =>
         sendData(statut, res, results, error, io)
       );
     });
