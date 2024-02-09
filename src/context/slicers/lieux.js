@@ -89,6 +89,7 @@ export const addLieux = (data) => {
             ? dispatch(ApiCallBackNoData())
             : dispatch(ApiCallBackFail("La création du lieu a échoué"));
         })
+        .then(() => window.location.reload())
         .catch((error) => {
           dispatch(
             ApiCallBackFail(

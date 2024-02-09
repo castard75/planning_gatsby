@@ -77,13 +77,11 @@ export const fetchAnimateurs = () => {
 };
 
 export const addAnimateurs = (data) => {
-  console.log("animateurs");
   return async (dispatch) => {
     dispatch(callApi());
 
     const token = getToken().token;
     if (!!token) {
-      console.log(data);
       await axios
         .post(`http://localhost:3000/api/addAnimateur?token=${token}`, data)
         .then((res) => {
@@ -91,6 +89,7 @@ export const addAnimateurs = (data) => {
             ? dispatch(ApiCallBackNoData())
             : dispatch(ApiCallBackFail("La création de l'animateur a échoué"));
         })
+        .then(() => window.location.reload())
         .catch((error) => {
           dispatch(
             ApiCallBackFail(

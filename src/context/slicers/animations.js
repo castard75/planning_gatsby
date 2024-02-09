@@ -109,6 +109,7 @@ export const addAnimations = (data, number = 1) => {
           `http://localhost:3000/api/addAnimations?token=${token}&number=${number}`,
           data
         )
+        .then(() => window.location.reload())
         .then((res) => {
           console.log(res.data);
           res.data.statut === "success"

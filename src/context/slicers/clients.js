@@ -87,6 +87,7 @@ export const addClients = (data) => {
             ? dispatch(ApiCallBackNoData())
             : dispatch(ApiCallBackFail("La création du client a échoué"));
         })
+        .then(() => window.location.reload())
         .catch((error) => {
           dispatch(
             ApiCallBackFail(
