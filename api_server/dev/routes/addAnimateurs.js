@@ -53,10 +53,10 @@ module.exports = (app, db) => {
       const currentDate = new Date();
       const { nom, age, secteur, mobilite, appreciation, commentaire } =
         req.body;
+      const values = [nom, age, secteur, mobilite, appreciation, commentaire];
+      const sql = `INSERT INTO animateurs (nom,age, secteur,mobilite,appreciation,commentaire) VALUES ( ?,?,?,?,?,?)`;
 
-      const sql = `INSERT INTO animateurs (nom,age, secteur,mobilite,appreciation,commentaire) VALUES ( '${nom}',  ${age},' ${secteur}', '${mobilite}',${appreciation},'${commentaire}')`;
-
-      db.query(sql, (err, result) => {
+      db.query(sql, values, (err, result) => {
         if (err) {
           res.status(404).json({ err });
           console.log(err);

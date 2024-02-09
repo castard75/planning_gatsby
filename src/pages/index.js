@@ -741,7 +741,7 @@ const PlanningPage = () => {
 
   return (
     <PageLayout seo={seoParams} ref={animationParent}>
-      <PopupMessage
+      {/* <PopupMessage
         message={
           typeof hasErrors === "object"
             ? hasErrors.status
@@ -753,7 +753,7 @@ const PlanningPage = () => {
             ? "Une erreur est survenue"
             : false
         }
-      />
+      /> */}
       <Popup
         isOpen={IsOpenDateFilter}
         closeIsOpen={() => setIsOpenDateFilter(false)}

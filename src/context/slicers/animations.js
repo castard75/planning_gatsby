@@ -93,11 +93,7 @@ export const fetchAnimations = (selectDate) => {
           );
         });
     } else {
-      dispatch(
-        ApiCallBackFail(
-          "Aucun jeton d'authentification, veuillez vous reconnecter"
-        )
-      );
+      dispatch(ApiCallBackFail(""));
     }
   };
 };
