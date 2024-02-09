@@ -81,7 +81,7 @@ export const addClients = (data) => {
     const token = getToken().token;
     if (!!token) {
       await axios
-        .post(`http://localhost:3000/api/clients?token=${token}`, data)
+        .post(`http://localhost:3000/api/addClients?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())

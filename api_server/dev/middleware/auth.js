@@ -19,7 +19,6 @@ module.exports = {
   },
 
   ioAuth: (socket, socketio) => {
-    console.log("EN COURS");
     //temp delete socket from namespace connected map
     delete socketio.sockets[socket.id];
 
@@ -33,7 +32,6 @@ module.exports = {
     }, options.timeout || 5000);
 
     var authenticate = function (data) {
-      console.log("EN COURS");
       clearTimeout(auth_timeout);
       jwt.verify(data.token, options.secret, options, function (err, decoded) {
         if (err) {
