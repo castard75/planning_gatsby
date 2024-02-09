@@ -319,7 +319,19 @@ const AnimateursPage = () => {
               className="dontShowWhenPrint"
               type="add"
               text="Ajouter un animateur"
-              onClick={() => dispatch(addAnimateurs({ nom: "" }))}
+              onClick={() =>
+                dispatch(
+                  addAnimateurs({
+                    nom: "",
+
+                    age: 0,
+                    secteur: " ",
+                    mobilite: " ",
+                    appreciation: 0,
+                    commentaire: " ",
+                  })
+                )
+              }
             />
           </div>
           <Button

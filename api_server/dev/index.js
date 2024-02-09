@@ -25,6 +25,7 @@ const animationsRouter = require("./routes/animations");
 const addAnimationsRouter = require("./routes/addAnimations");
 const addLieuxRouter = require("./routes/addLieux");
 const animateursRouter = require("./routes/animateurs");
+const addAnimateursRouter = require("./routes/addAnimateurs");
 const addClientssRouter = require("./routes/addClients");
 const clientsRouter = require("./routes/clients");
 const lieuxRouter = require("./routes/lieux");
@@ -75,6 +76,7 @@ app
   .use("/api", animationsRouter(app, db))
   .use("/api", animateursRouter(app, db))
   .use("/api", addAnimationsRouter(app, db))
+  .use("/api", addAnimateursRouter(app, db))
   .use("/api", clientsRouter(app, db))
   .use("/api", addClientssRouter(app, db))
   .use("/api", lieuxRouter(app, db))

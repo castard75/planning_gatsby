@@ -46,13 +46,15 @@ module.exports = (app, db) => {
     } else res.status(500).send({ statut: "failed", results: "API error" });
   };
 
-  router.route("/addClients").post((req, res) => {
+  router.route("/addAnimateur").post((req, res) => {
+    console.log("1");
     try {
       // Formater les données pour correspondre aux colonnes de la table
       const currentDate = new Date();
-      const { societe, interlocuteur, telephone, mail } = req.body;
+      const { nom, age, secteur, mobilite, appreciation, commentaire } =
+        req.body;
 
-      const sql = `INSERT INTO clients (societe, interlocuteur	, telephone, mail) VALUES ( '${societe}', '${interlocuteur}',' ${telephone}', '${mail}')`;
+      const sql = `INSERT INTO animateurs (nom,age, secteur,mobilite,appreciation,commentaire) VALUES ( '${nom}',  ${age},' ${secteur}', '${mobilite}',${appreciation},'${commentaire}')`;
 
       db.query(sql, (err, result) => {
         if (err) {

@@ -130,11 +130,7 @@ export const addAnimations = (data, number = 1) => {
           );
         });
     } else {
-      dispatch(
-        ApiCallBackFail(
-          "Aucun jeton d'authentification, veuillez vous reconnecter"
-        )
-      );
+      dispatch(ApiCallBackFail(""));
     }
   };
 };

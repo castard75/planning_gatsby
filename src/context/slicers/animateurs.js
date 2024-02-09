@@ -83,8 +83,9 @@ export const addAnimateurs = (data) => {
 
     const token = getToken().token;
     if (!!token) {
+      console.log(data);
       await axios
-        .post(`http://localhost:3000/api/animateurs?token=${token}`, data)
+        .post(`http://localhost:3000/api/addAnimateur?token=${token}`, data)
         .then((res) => {
           res.data.statut === "success"
             ? dispatch(ApiCallBackNoData())
